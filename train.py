@@ -237,6 +237,23 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument('--no_seq_agg', dest='use_seq_agg', action='store_false',
                         help='Disable the sequence aggregation shortcut.')
 
+    # DCN-V2 explicit cross network (parallel branch).
+    parser.add_argument('--use_dcn_v2', action='store_true', default=False,
+                        help='Enable DCN-V2 cross network as a parallel branch. '
+                             'Operates on flattened gated NS tokens + raw dense '
+                             'features and contributes a separate logit summed '
+                             'with the deep tower output. Targets the val-AUC '
+                             'ceiling left by the existing attention/deep stack.')
+    parser.add_argument('--dcn_v2_layers', type=int, default=3,
+                        help='Number of stacked Cross layers (only used when '
+                             '--use_dcn_v2 is set). 3 captures up to 4-order '
+                             'feature interactions; 4-5 are also reasonable.')
+    parser.add_argument('--dcn_v2_low_rank', type=int, default=0,
+                        help='If > 0, use the low-rank DCN-V2 factorization '
+                             'W_l ~= V_l @ U_l with rank r=value. 0 = full-rank '
+                             'square matrix (default). Set to e.g. 64 to cap '
+                             'parameter cost when input_dim is in the thousands.')
+
     args = parser.parse_args()
 
     # Environment variables take precedence.
@@ -346,6 +363,9 @@ def main() -> None:
         "item_ns_tokens": args.item_ns_tokens,
         "class_prior_logit": args.class_prior_logit,
         "use_seq_agg": args.use_seq_agg,
+        "use_dcn_v2": args.use_dcn_v2,
+        "dcn_v2_layers": args.dcn_v2_layers,
+        "dcn_v2_low_rank": args.dcn_v2_low_rank,
     }
 
     # Auto-adjust rank_mixer_mode when d_model % T != 0 to avoid ValueError at init.

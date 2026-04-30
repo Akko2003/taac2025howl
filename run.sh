@@ -2,18 +2,23 @@
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 export PYTHONPATH="${SCRIPT_DIR}:${PYTHONPATH}"
 
-# ---- Active config: aggressive run aiming to break past val AUC 0.860 ----
+# ---- Active config: DCN-V2 added to break past val AUC 0.860 ceiling ----
 #
-# Stack (vs the previous 0.809 leaderboard run):
-#   * seq_top_k 64 -> 128: doubles the recent-behavior context kept by
-#     LongerEncoder. Compression remains as implicit regularization.
-#   * --use_rope: relative position encoding for sequence attention.
-#   * --use_swa --swa_start_epoch 2: average epoch>=2 weights into a flat
-#     minimum for the final checkpoint; targets the val->test gap.
-#   * dropout 0.15 -> 0.18, weight_decay 1e-5 -> 3e-5: more regularization
-#     to keep that gap from widening as we capture more signal.
-#   * num_epochs 4 -> 6, patience 2 -> 3: give SWA at least 4-5 epochs of
-#     averaging to actually do something.
+# Carries forward the previous run's stack (SWA + RoPE + cosine LR + tight
+# regularization). New here:
+#   * --use_dcn_v2 --dcn_v2_layers 3: parallel cross network on the
+#     flattened gated NS tokens + raw dense features. Adds explicit
+#     polynomial-style feature crosses that the deep/attention towers
+#     would otherwise have to discover from scratch. The cross logit head
+#     is zero-initialized so the model boots equivalent to the previous
+#     deep-only network and only diverges as the cross branch learns
+#     useful interactions.
+#   * --dcn_v2_low_rank 0: full-rank square W_l per layer. Switch to
+#     a positive value (e.g. 64) if memory becomes tight.
+#
+# SWA window slightly extended (start_epoch 2->3, num_epochs 6->5) so the
+# DCN-V2 branch has 1-2 extra epochs of solo training before being folded
+# into the running mean.
 python3 -u "${SCRIPT_DIR}/train.py" \
     --ns_tokenizer_type rankmixer \
     --user_ns_tokens 5 \
@@ -27,12 +32,15 @@ python3 -u "${SCRIPT_DIR}/train.py" \
     --reinit_cardinality_threshold 0 \
     --patience 3 \
     --dropout_rate 0.18 \
-    --num_epochs 6 \
+    --num_epochs 5 \
     --weight_decay 3e-5 \
     --lr_schedule cosine \
     --use_rope \
     --use_swa \
-    --swa_start_epoch 2 \
+    --swa_start_epoch 3 \
+    --use_dcn_v2 \
+    --dcn_v2_layers 3 \
+    --dcn_v2_low_rank 0 \
     "$@"
 
 # ---- Alternative config: GroupNSTokenizer driven by ns_groups.json ----

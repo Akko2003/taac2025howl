@@ -329,6 +329,36 @@ class PCVRParquetDataset(IterableDataset):
             # max_len: from seq_max_lens arg; unspecified domains fall back to 256.
             self._seq_maxlen[domain] = seq_max_lens.get(domain, 256)
 
+        # ---- Engineered sequence-statistics dense features ----
+        # We virtually extend ``user_dense_schema`` with N extra slots so the
+        # downstream model picks up a wider ``user_dense_dim`` automatically
+        # (no schema.json change needed). The slots are filled in
+        # ``_convert_batch`` after the per-sample sequence buffers are built.
+        #
+        # Layout (per domain, in self.seq_domains order):
+        #   [log_len, max_bucket, mean_bucket, min_bucket]
+        # Followed by 2 cross-domain slots:
+        #   [log_total_events, frac_nonempty_domains]
+        #
+        # All values are normalized to roughly [0, 1] so the model's existing
+        # LayerNorm-after-projection on user_dense behaves the same as before.
+        self._eng_per_domain = 4
+        self._num_eng_features = (
+            self._eng_per_domain * len(self.seq_domains) + 2
+        )
+        # Remember where the engineered slots start within the (extended)
+        # user_dense buffer; populated below after the schema is grown.
+        self._eng_offset = self.user_dense_schema.total_dim
+        # Use a sentinel fid (-1) to register the contiguous extension. The
+        # FeatureSchema only cares about (offset, length); fid -1 signals
+        # "computed in dataset code, not from a parquet column".
+        self.user_dense_schema.add(-1, self._num_eng_features)
+        logging.info(
+            f"Engineered seq-stats features: appended {self._num_eng_features} "
+            f"slots to user_dense (offset={self._eng_offset}, "
+            f"new total_dim={self.user_dense_schema.total_dim})"
+        )
+
     def __len__(self) -> int:
         # Ceiling per Row Group; this is an upper bound on the true batch count.
         return sum((n + self.batch_size - 1) // self.batch_size
@@ -666,7 +696,96 @@ class PCVRParquetDataset(IterableDataset):
 
             result[f'{domain}_time_bucket'] = torch.from_numpy(time_bucket.copy())
 
+        # ---- Engineered seq-stats dense features ----
+        # Now that all per-domain ``_buf_seq_lens`` and ``_buf_seq_tb`` slots
+        # are populated, fill the tail of the user_dense buffer with summary
+        # statistics. Then re-publish ``user_dense_feats`` because the
+        # earlier copy captured the tail in its still-zeroed state.
+        if self._num_eng_features > 0:
+            self._fill_seq_eng_features(B, user_dense)
+            result['user_dense_feats'] = torch.from_numpy(user_dense.copy())
+
         return result
+
+    def _fill_seq_eng_features(
+        self,
+        B: int,
+        user_dense: "npt.NDArray[np.float32]",
+    ) -> None:
+        """Compute summary stats over the per-domain length / time-bucket
+        buffers and write them into the engineered tail of ``user_dense``.
+
+        Layout matches the schema extension performed in ``_load_schema``:
+        for each domain in ``self.seq_domains``, four slots
+        ``[log_len, max_bucket_norm, mean_bucket_norm, min_bucket_norm]``,
+        followed by two cross-domain slots
+        ``[log_total_events, frac_nonempty_domains]``. All values are
+        normalized to roughly [0, 1] so they coexist with the raw dense
+        features without dominating the linear projection.
+
+        Args:
+            B: actual batch size for this call.
+            user_dense: (B, user_dense_schema.total_dim) buffer to write into.
+                Only the slice ``[:, self._eng_offset:]`` is touched.
+        """
+        num_tb = float(NUM_TIME_BUCKETS)
+        num_domains = float(len(self.seq_domains))
+        cur = self._eng_offset
+
+        total_events = np.zeros(B, dtype=np.float32)
+        nonempty = np.zeros(B, dtype=np.float32)
+
+        for domain in self.seq_domains:
+            lengths = self._buf_seq_lens[domain][:B]                  # (B,)
+            time_buckets = self._buf_seq_tb[domain][:B]               # (B, max_len)
+
+            # 1) log(seq_len + 1) — activity volume per domain.
+            user_dense[:, cur] = np.log1p(lengths.astype(np.float32))
+            cur += 1
+
+            # 2) max bucket / NUM_TB — recency of the *oldest* event.
+            max_b = time_buckets.max(axis=1).astype(np.float32) / num_tb
+            user_dense[:, cur] = max_b
+            cur += 1
+
+            # 3) mean bucket / NUM_TB — average recency over valid events.
+            #    Empty rows produce 0 (count clamped to 1, sum=0).
+            valid_mask = (time_buckets > 0).astype(np.float32)
+            sum_b = (time_buckets.astype(np.float32) * valid_mask).sum(axis=1)
+            count_b = valid_mask.sum(axis=1)
+            mean_b = np.where(
+                count_b > 0,
+                sum_b / np.maximum(count_b, 1.0),
+                0.0,
+            ).astype(np.float32) / num_tb
+            user_dense[:, cur] = mean_b
+            cur += 1
+
+            # 4) min bucket / NUM_TB — recency of the *newest* event.
+            #    Use a large sentinel so that empty rows resolve to 0 after
+            #    the where() rather than to NUM_TB (which would falsely
+            #    indicate "very recent activity").
+            sentinel = NUM_TIME_BUCKETS + 1
+            masked_for_min = np.where(
+                time_buckets > 0, time_buckets, sentinel
+            ).astype(np.int64)
+            min_b_raw = masked_for_min.min(axis=1)
+            min_b = np.where(
+                min_b_raw > NUM_TIME_BUCKETS,
+                0,
+                min_b_raw,
+            ).astype(np.float32) / num_tb
+            user_dense[:, cur] = min_b
+            cur += 1
+
+            total_events += lengths.astype(np.float32)
+            nonempty += (lengths > 0).astype(np.float32)
+
+        # Cross-domain slots.
+        user_dense[:, cur] = np.log1p(total_events)
+        cur += 1
+        user_dense[:, cur] = nonempty / num_domains
+        cur += 1
 
 
 def get_pcvr_data(

@@ -1,0 +1,257 @@
+2026-04-30 17:40:30.342 ##########################################################################
+
+2026-04-30 17:40:30.342 ############################ TAIJI JOB START #############################
+
+2026-04-30 17:40:30.342 ##########################################################################
+
+2026-04-30 17:40:30.359 cp: cannot stat './/*': No such file or directory
+
+2026-04-30 17:40:30.368 passwd: password expiry information changed.
+
+2026-04-30 17:40:36.957 Complete setting taiji user.
+
+2026-04-30 17:40:42.649 update taiji environ ...
+
+2026-04-30 17:40:42.649 show args: --appName=95a8cc5c9dca2162019dddc2c39d2b2b --projectName=external-ams-competition-2025 --module=pytorch --script=/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/run.sh --script_archive=/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/dataset.py,/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/model.py,/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/ns_groups.json,/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/train.py,/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/trainer.py,/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/utils.py,/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/.taiji_run.json --script_args=
+
+2026-04-30 17:40:42.739 INFO: ===begin to run init cmd===
+
+2026-04-30 17:40:42.739 INFO: Export env: RUNTIME_SCRIPT_DIR=/home/taiji/dl/runtime/script
+
+2026-04-30 17:40:42.799 INFO: Export env: RUNTIME_SCRIPT_SHARE_DIR=/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/95a8cc5c9dca2162019dddc2c39d2b2b/pipeline/95a8cc5c9dca2162019dddc2c39d2b2b/share
+
+2026-04-30 17:40:42.799 INFO: script_path :/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/run.sh
+
+2026-04-30 17:40:42.829 INFO: Success copy to /home/taiji/dl/runtime/script/run.sh
+
+2026-04-30 17:40:42.859 INFO: Success copy to /home/taiji/dl/runtime/script/dataset.py
+
+2026-04-30 17:40:42.888 INFO: Success copy to /home/taiji/dl/runtime/script/model.py
+
+2026-04-30 17:40:42.917 INFO: Success copy to /home/taiji/dl/runtime/script/ns_groups.json
+
+2026-04-30 17:40:42.946 INFO: Success copy to /home/taiji/dl/runtime/script/train.py
+
+2026-04-30 17:40:42.976 INFO: Success copy to /home/taiji/dl/runtime/script/trainer.py
+
+2026-04-30 17:40:43.007 INFO: Success copy to /home/taiji/dl/runtime/script/utils.py
+
+2026-04-30 17:40:43.010 INFO: Success copy to /home/taiji/dl/runtime/script/.taiji_run.json
+
+2026-04-30 17:40:43.010 INFO: python path: /home/taiji/dl/runtime/script/dataset.py:/home/taiji/dl/runtime/script/model.py:/home/taiji/dl/runtime/script/ns_groups.json:/home/taiji/dl/runtime/script/train.py:/home/taiji/dl/runtime/script/trainer.py:/home/taiji/dl/runtime/script/utils.py:/home/taiji/dl/runtime/script/.taiji_run.json
+
+2026-04-30 17:40:43.010 INFO: Export env: TRAIN_CKPT_PATH=/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/95a8cc5c9dca2162019dddc2c39d2b2b/ckpt
+
+2026-04-30 17:40:43.010 INFO: Export env: TRAIN_TF_EVENTS_PATH=/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/95a8cc5c9dca2162019dddc2c39d2b2b/events
+
+2026-04-30 17:40:43.010 INFO: Export env: TRAIN_DATA_PATH=/data_ams/academic_training_data
+
+2026-04-30 17:40:43.010 INFO: Export env: TRAIN_USER=ams_2026_1393421075977191961
+
+2026-04-30 17:40:43.010 INFO: Export env: TRAIN_LOG_PATH=/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/95a8cc5c9dca2162019dddc2c39d2b2b/log
+
+2026-04-30 17:40:43.010 INFO: Export env: TRAIN_CACHE_PATH=/apdcephfs_fsgm2/share_305170765/angel/groups/65/ams_2026_1393421075977191961
+
+2026-04-30 17:40:43.010 INFO: Export env: USER_CACHE_PATH=/apdcephfs_fsgm2/share_305170765/angel/groups/65/ams_2026_1393421075977191961
+
+2026-04-30 17:40:43.010 INFO: Export env: NP_BD_FLOW_PROJ=7890691
+
+2026-04-30 17:40:43.020 touch: cannot touch '/data/initCmdCompletedFile': No such file or directory
+
+2026-04-30 17:40:43.020 initCmd failed
+
+2026-04-30 17:40:43.021 [TAIJI] Starting sshd
+
+2026-04-30 17:40:44.043 [TAIJI] sshd started
+
+2026-04-30 17:40:44.043 [TAIJI] waiting for all peers to be ready...
+
+2026-04-30 17:40:45.390 Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.4.241-1-tlinux4-0017.7 x86_64)
+
+2026-04-30 17:40:45.390
+
+2026-04-30 17:40:45.390 * Documentation: https://help.ubuntu.com
+
+2026-04-30 17:40:45.390 * Management: https://landscape.canonical.com
+
+2026-04-30 17:40:45.390 * Support: https://ubuntu.com/pro
+
+2026-04-30 17:40:45.390
+
+2026-04-30 17:40:45.390 This system has been minimized by removing packages and content that are
+
+2026-04-30 17:40:45.390 not required on a system that users do not log into.
+
+2026-04-30 17:40:45.390
+
+2026-04-30 17:40:45.390 To restore this content, you can run the 'unminimize' command.
+
+2026-04-30 17:40:45.390
+
+2026-04-30 17:40:45.390 The programs included with the Ubuntu system are free software;
+
+2026-04-30 17:40:45.390 the exact distribution terms for each program are described in the
+
+2026-04-30 17:40:45.390 individual files in /usr/share/doc/*/copyright.
+
+2026-04-30 17:40:45.390
+
+2026-04-30 17:40:45.390 Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+
+2026-04-30 17:40:45.390 applicable law.
+
+2026-04-30 17:40:45.390
+
+2026-04-30 17:40:46.531 [TAIJI] error log above can be ignored
+
+2026-04-30 17:40:46.536 [TAIJI] run command 1777542046 [/bin/bash -c "${start_script}"]
+
+2026-04-30 17:40:49.967 Complete setting network policy rules.
+
+2026-04-30 17:40:55.904 update taiji environ ...
+
+2026-04-30 17:40:55.904 show args: --appName=95a8cc5c9dca2162019dddc2c39d2b2b --projectName=external-ams-competition-2025n --module=pytorch --script=/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/run.sh --script_archive=/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/dataset.py,/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/model.py,/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/ns_groups.json,/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/train.py,/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/trainer.py,/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/utils.py,/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/.taiji_run.json --script_args=
+
+2026-04-30 17:40:55.948 INFO: ===begin to run starttorch cmd===
+
+2026-04-30 17:40:55.948 INFO: runtime_script_share_dir is /apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/95a8cc5c9dca2162019dddc2c39d2b2b/pipeline/95a8cc5c9dca2162019dddc2c39d2b2b/share
+
+2026-04-30 17:40:55.948 INFO: script_path :/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/scripts/95a8cc5c9dca2162019dddc2c39d2b2b/run.sh
+
+2026-04-30 17:40:55.949 INFO: framework is pytorch
+
+2026-04-30 17:40:55.949 INFO: Run command: bash /home/taiji/dl/runtime/script/run.sh
+
+2026-04-30 17:40:55.949 INFO: ====== Begin cmd ======
+
+2026-04-30 17:40:57.446 [DEBUG][libvgpu]hijack_call.c:106 [p:270 t:270]init cuda hook lib
+
+2026-04-30 17:40:57.446 [DEBUG][libvgpu]hijack_call.c:107 [p:270 t:270]Thread pid:270, tid:270
+
+2026-04-30 17:40:57.446 [DEBUG][libvgpu]hijack_call.c:125 [p:270 t:270]env_ld_library_path: /usr/local/cuda/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64
+
+2026-04-30 17:40:57.451 [DEBUG][libvgpu]hijack_call.c:172 [p:270 t:270]hooked env NCCL_SET_THREAD_NAME to : 1
+
+2026-04-30 17:40:57.451 [DEBUG][libvgpu]hijack_call.c:173 [p:270 t:270]hooked LD_LIBRARY_PATH to : /usr/local/cuda/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64
+
+2026-04-30 17:40:57.451 [DEBUG][libvgpu]hijack_call.c:174 [p:270 t:270]hooked libnvml_realpath to : /lib/x86_64-linux-gnu/libnvidia-ml.so.1
+
+2026-04-30 17:40:57.451 [DEBUG][libvgpu]hijack_call.c:175 [p:270 t:270]hooked libcuda_realpath to : /lib/x86_64-linux-gnu/libcuda.so.1
+
+2026-04-30 17:41:01.522 04/30/26 17:41:01 - 0:00:00 - Args: {'data_dir': '/data_ams/academic_training_data', 'schema_path': None, 'ckpt_dir': '/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/95a8cc5c9dca2162019dddc2c39d2b2b/ckpt', 'log_dir': '/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/95a8cc5c9dca2162019dddc2c39d2b2b/log', 'batch_size': 512, 'lr': 0.0003, 'num_epochs': 5, 'patience': 3, 'seed': 42, 'device': 'cuda', 'num_workers': 4, 'buffer_batches': 20, 'train_ratio': 1.0, 'valid_ratio': 0.1, 'eval_every_n_steps': 5000, 'seq_max_lens': 'seq_a:256,seq_b:256,seq_c:512,seq_d:512', 'd_model': 128, 'emb_dim': 128, 'num_queries': 2, 'num_hyformer_blocks': 3, 'num_heads': 8, 'seq_encoder_type': 'longer', 'hidden_mult': 4, 'dropout_rate': 0.18, 'seq_top_k': 128, 'seq_causal': False, 'action_num': 1, 'use_time_buckets': True, 'rank_mixer_mode': 'full', 'use_rope': True, 'rope_base': 10000.0, 'loss_type': 'focal', 'focal_alpha': 0.1, 'focal_gamma': 2.0, 'sparse_lr': 0.05, 'sparse_weight_decay': 0.0, 'reinit_sparse_after_epoch': 1, 'reinit_cardinality_threshold': 0, 'emb_skip_threshold': 1000000, 'seq_id_threshold': 10000, 'ns_groups_json': '', 'ns_tokenizer_type': 'rankmixer', 'user_ns_tokens': 5, 'item_ns_tokens': 2, 'class_prior_logit': -2.0, 'label_smoothing': 0.05, 'warmup_steps': 1000, 'lr_schedule': 'cosine', 'weight_decay': 3e-05, 'cosine_min_lr_ratio': 0.1, 'use_swa': True, 'swa_start_epoch': 3, 'use_seq_agg': True, 'use_dcn_v2': True, 'dcn_v2_layers': 3, 'dcn_v2_low_rank': 0, 'tf_events_dir': '/apdcephfs_fsgm2/share_305170765/angel/ams_2026_1393421075977191961/angel_training_ams_2026_1393421075977191961_20260430174018_b09dee8a/95a8cc5c9dca2162019dddc2c39d2b2b/events'}
+
+2026-04-30 17:41:01.893 2026-04-30 17:41:01.893123: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+
+2026-04-30 17:41:01.902 2026-04-30 17:41:01.902461: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+
+2026-04-30 17:41:01.913 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+
+2026-04-30 17:41:01.913 E0000 00:00:1777542061.913822 266 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+
+2026-04-30 17:41:01.917 E0000 00:00:1777542061.917271 266 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+
+2026-04-30 17:41:01.926 W0000 00:00:1777542061.926490 266 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+
+2026-04-30 17:41:01.926 W0000 00:00:1777542061.926506 266 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+
+2026-04-30 17:41:01.926 W0000 00:00:1777542061.926508 266 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+
+2026-04-30 17:41:01.926 W0000 00:00:1777542061.926510 266 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+
+2026-04-30 17:41:01.929 2026-04-30 17:41:01.929870: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+
+2026-04-30 17:41:01.930 To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+
+2026-04-30 17:41:05.983 04/30/26 17:41:05 - 0:00:04 - generated new fontManager
+
+2026-04-30 17:41:06.420 04/30/26 17:41:06 - 0:00:05 - Seq max_lens override: {'seq_a': 256, 'seq_b': 256, 'seq_c': 512, 'seq_d': 512}
+
+2026-04-30 17:41:06.420 04/30/26 17:41:06 - 0:00:05 - Using Parquet data format (IterableDataset)
+
+2026-04-30 17:41:06.941 04/30/26 17:41:06 - 0:00:05 - Row Group split: 900 train (907381 rows), 100 valid (102619 rows)
+
+2026-04-30 17:41:07.457 04/30/26 17:41:07 - 0:00:06 - Engineered seq-stats features: appended 18 slots to user_dense (offset=918, new total_dim=936)
+
+2026-04-30 17:41:07.459 04/30/26 17:41:07 - 0:00:06 - PCVRParquetDataset: 907381 rows from 1000 file(s), batch_size=512, buffer_batches=20, shuffle=True
+
+2026-04-30 17:41:07.970 04/30/26 17:41:07 - 0:00:06 - Engineered seq-stats features: appended 18 slots to user_dense (offset=918, new total_dim=936)
+
+2026-04-30 17:41:07.971 04/30/26 17:41:07 - 0:00:06 - PCVRParquetDataset: 102619 rows from 1000 file(s), batch_size=512, buffer_batches=0, shuffle=False
+
+2026-04-30 17:41:07.971 04/30/26 17:41:07 - 0:00:06 - Parquet train: 907381 rows, valid: 102619 rows, batch_size=512, buffer_batches=20
+
+2026-04-30 17:41:07.972 04/30/26 17:41:07 - 0:00:06 - No NS groups JSON found, using default: each feature as one group
+
+2026-04-30 17:41:07.990 04/30/26 17:41:07 - 0:00:06 - RankMixerNSTokenizer: 46 fids, total_emb_dim=5888, chunk_dim=1178, num_ns_tokens=5, pad=2
+
+2026-04-30 17:41:08.028 04/30/26 17:41:08 - 0:00:07 - RankMixerNSTokenizer: 14 fids, total_emb_dim=1792, chunk_dim=896, num_ns_tokens=2, pad=0
+
+2026-04-30 17:41:10.563 04/30/26 17:41:10 - 0:00:09 - DCN-V2 enabled: input_dim=1960, layers=3, low_rank=None
+
+2026-04-30 17:41:12.372 04/30/26 17:41:12 - 0:00:11 - Output bias initialized with class_prior_logit=-2.000 (≈11.9% prior positive rate)
+
+2026-04-30 17:41:12.373 04/30/26 17:41:12 - 0:00:11 - emb_skip_threshold=1000000: seq_b skipped 1/13 features
+
+2026-04-30 17:41:12.373 04/30/26 17:41:12 - 0:00:11 - emb_skip_threshold=1000000: seq_c skipped 3/11 features
+
+2026-04-30 17:41:16.862 04/30/26 17:41:16 - 0:00:15 - PCVRHyFormer model created: num_ns=8, T=16, d_model=128, rank_mixer_mode=full
+
+2026-04-30 17:41:16.862 04/30/26 17:41:16 - 0:00:15 - User NS groups: [[0], [1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12], [13], [14], [15], [16], [17], [18], [19], [20], [21], [22], [23], [24], [25], [26], [27], [28], [29], [30], [31], [32], [33], [34], [35], [36], [37], [38], [39], [40], [41], [42], [43], [44], [45]]
+
+2026-04-30 17:41:16.862 04/30/26 17:41:16 - 0:00:15 - Item NS groups: [[0], [1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12], [13]]
+
+2026-04-30 17:41:16.864 04/30/26 17:41:16 - 0:00:15 - Total parameters: 498,083,066
+
+2026-04-30 17:41:16.868 04/30/26 17:41:16 - 0:00:15 - Sparse params: 98 tensors, 474,871,552 parameters (Adagrad lr=0.05)
+
+2026-04-30 17:41:16.868 04/30/26 17:41:16 - 0:00:15 - Dense params: 581 tensors, 23,211,514 parameters (AdamW lr=0.0003)
+
+2026-04-30 17:41:19.661 04/30/26 17:41:19 - 0:00:18 - LR schedule: warmup=1000, mode=cosine, total_steps=9665, min_ratio=0.1
+
+2026-04-30 17:41:19.707 04/30/26 17:41:19 - 0:00:18 - SWA enabled: averaging starts at end of epoch 3 (using equal-weight running mean).
+
+2026-04-30 17:41:19.708 04/30/26 17:41:19 - 0:00:18 - PCVRHyFormerRankingTrainer loss_type=focal, focal_alpha=0.1, focal_gamma=2.0, label_smoothing=0.05, weight_decay=3e-05, use_swa=True, swa_start_epoch=3, reinit_sparse_after_epoch=1
+
+2026-04-30 17:41:19.708 Start training (PCVRHyFormer)
+
+2026-04-30 17:41:23.832 0%| | 0/1933 [00:00<?, ?it/s] 0%| | 0/1933 [00:04<?, ?it/s]
+
+2026-04-30 17:41:23.833 Traceback (most recent call last):
+
+2026-04-30 17:41:23.833 File "/home/taiji/dl/runtime/script/train.py", line 459, in <module>
+
+2026-04-30 17:41:23.833 main()
+
+2026-04-30 17:41:23.833 File "/home/taiji/dl/runtime/script/train.py", line 452, in main
+
+2026-04-30 17:41:23.833 trainer.train()
+
+2026-04-30 17:41:23.833 File "/home/taiji/dl/runtime/script/trainer.py", line 386, in train
+
+2026-04-30 17:41:23.833 loss = self._train_step(batch)
+
+2026-04-30 17:41:23.833 File "/home/taiji/dl/runtime/script/trainer.py", line 542, in _train_step
+
+2026-04-30 17:41:23.833 logits = self.model(model_input) # (B, 1)
+
+2026-04-30 17:41:23.833 File "/opt/conda/envs/competition/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+
+2026-04-30 17:41:23.833 return self._call_impl(*args, **kwargs)
+
+2026-04-30 17:41:23.833 File "/opt/conda/envs/competition/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+
+2026-04-30 17:41:23.833 return forward_call(*args, **kwargs)
+
+2026-04-30 17:41:23.833 File "/home/taiji/dl/runtime/script/model.py", line 1928, in forward
+
+2026-04-30 17:41:23.834 tokens = self._embed_seq_domain(
+
+2026-04-30 17:41:23.834 File "/home/taiji/dl/runtime/script/model.py", line 1746, in _embed_seq_domain
+
+2026-04-30 17:41:23.834 cat_emb = torch.cat(emb_list, dim=-1) # (B, L, S*emb_dim)
+
+2026-04-30 17:41:23.834 torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.38 GiB. GPU 0 has a total capacity of 38.23 GiB of which 38.23 GiB is free. Process 331714 has 42.79 GiB memory in use. Process 1259347 has 14.54 GiB memory in use. Process 66229 has 27.27 GiB memory in use. Process 2413250 has 9.32 GiB memory in use. Of the allocated memory 8.83 GiB is allocated by PyTorch, and 64.29 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation. See documentation for Memory Management (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+2026-04-30 17:41:45.761 INFO: ======= End cmd =======
+
+2026-04-30 17:41:45.767 [TAIJI] user exit code: 1
